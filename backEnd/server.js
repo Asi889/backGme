@@ -73,6 +73,6 @@ app.listen(port, () => {
 //     console.log('listening on *:3003');
 // });
 
-mongoose.connect('mongodb+srv://asi:Asi123321@gig.jr1wz.mongodb.net/gig' { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect('mongodb+srv://asi:Asi123321@gig.jr1wz.mongodb.net/gig', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 // mongoose.connect(process.env.MONGODB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
     // 'mongodb+srv://asi:Asi123321@gig.jr1wz.mongodb.net/gig'

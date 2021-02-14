@@ -33,7 +33,7 @@ app.use(cors());
 ///hello
 
 
-app.use('/api', api)
+app.use('/', api)
 
 // app.get('/', (req,res)=>{
 //     res.render()

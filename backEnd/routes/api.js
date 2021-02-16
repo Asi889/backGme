@@ -12,7 +12,7 @@ const path = require('path');
 
 
 
-router.post('/api/userSignUp', async (req, res) => {
+router.post('/userSignUp', async (req, res) => {
     try {
 
         let { email, firstName, lastName, password, passwordCheck } = req.body
@@ -56,7 +56,7 @@ router.post('/api/userSignUp', async (req, res) => {
 });
 
 
-router.post('/api/logIn', async (req, res) => {
+router.post('/logIn', async (req, res) => {
     try {
         const { email, password } = req.body
 
@@ -100,7 +100,7 @@ router.post('/api/logIn', async (req, res) => {
     }
 });
 
-router.delete('/api/deleteUser', auth, async (req, res) => {
+router.delete('/deleteUser', auth, async (req, res) => {
     try {
 
         const deletedUser = await User.findOneAndDelete(req.user)
@@ -112,7 +112,7 @@ router.delete('/api/deleteUser', auth, async (req, res) => {
     }
 })
 
-router.post('/api/tokenIsValid', async (req, res) => {
+router.post('/tokenIsValid', async (req, res) => {
     try {
         const token = req.header("x-auth-token")
 
@@ -146,7 +146,7 @@ router.get("/test", (req, res) => {
 
 
 
-router.get("/api/profile", auth, async (req, res) => {
+router.get("/profile", auth, async (req, res) => {
     // console.log(req.user);
     const user = await User.findById(req.user)
     // console.log(user);
@@ -154,11 +154,14 @@ router.get("/api/profile", auth, async (req, res) => {
 })
 
 
-router.get("/api/test", (req, res) => {
-    res.json("HELLO user")
+router.get("/api/test", async (req, res) => {
+    const id = '6006a6af868b9d3b44e90ccf'
+    const user1 = await User.findById({ _id: id });
+    console.log(user1);
+    res.json(`HELLO user - ${user1.firstName} ${user1.lastName}`)
 })
 
-router.post('/api/newGig', auth, async (req, res) => {
+router.post('/newGig', auth, async (req, res) => {
 
     try {
 
@@ -176,7 +179,7 @@ router.post('/api/newGig', auth, async (req, res) => {
 
 })
 
-router.get('/api/getReviews', auth, async (req, res) => {
+router.get('/getReviews', auth, async (req, res) => {
     try {
 
         let user = req.user
@@ -192,7 +195,7 @@ router.get('/api/getReviews', auth, async (req, res) => {
 
 })
 
-router.post('/api/newReview', auth, async (req, res) => {
+router.post('/newReview', auth, async (req, res) => {
     try {
 
         // console.log(req.body);
@@ -204,7 +207,7 @@ router.post('/api/newReview', auth, async (req, res) => {
     }
 })
 
-router.get("/api/applyToGig/:id", auth, async (req, res) => {
+router.get("/applyToGig/:id", auth, async (req, res) => {
 
     try {
 
@@ -225,7 +228,7 @@ router.get("/api/applyToGig/:id", auth, async (req, res) => {
 
 })
 
-router.get("/api/finishGig/:id", auth, async (req, res) => {
+router.get("/finishGig/:id", auth, async (req, res) => {
 
     try {
         console.log(req.params.id);
@@ -241,20 +244,20 @@ router.get("/api/finishGig/:id", auth, async (req, res) => {
 
 })
 
-router.get("/api/feed", auth, async (req, res) => {
+router.get("/feed", auth, async (req, res) => {
     const gigs = await Gig.find({})
 
     res.send(gigs)
     // res.json("HELLO user")
 });
 
-router.get("/api/allUsers", auth, async (req, res) => {
+router.get("/allUsers", auth, async (req, res) => {
     const allUsers = await User.find({});
     res.send(allUsers)
     // res.json("HELLO user")
 });
 
-router.put("/api/updateGig", auth, async (req, res) => {
+router.put("/updateGig", auth, async (req, res) => {
 
     try {
 
@@ -279,7 +282,7 @@ router.put("/api/updateGig", auth, async (req, res) => {
 })
 
 
-router.put("/api/updateProfile", auth, async (req, res) => {
+router.put("/updateProfile", auth, async (req, res) => {
     try {
 
         let picture = req.body
@@ -293,7 +296,7 @@ router.put("/api/updateProfile", auth, async (req, res) => {
         // console.log("shack");
         // console.log(picture);
         // console.log("shuck");
-        let user = await User.findByIdAndUpdate({ _id: _id }, {picture: picture.pic});
+        let user = await User.findByIdAndUpdate({ _id: _id }, { picture: picture.pic });
         // user.picture = picture
         user = await user.save();
         res.send(user.picture);

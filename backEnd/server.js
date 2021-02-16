@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
-app.use(cors());
+// app.use(cors());
 
 
 // app.get('/hell', (req, res) => {

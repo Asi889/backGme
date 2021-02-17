@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({ origin: true, credentials: true }));
 // app.use(cors());
 
 
@@ -41,7 +41,7 @@ app.use('/', api)
 // })
 
 // const port = 80
-const port = 3001
+const port = process.env.PORT || 3001
 
 app.listen(port, () => {
     console.log(`running on port ${port}`);
